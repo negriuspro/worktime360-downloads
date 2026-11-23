@@ -10,6 +10,8 @@ param(
   [switch]$Prueba
 )
 $ErrorActionPreference = 'Stop'
+# Cualquier rechazo se muestra como un mensaje claro, sin el detalle técnico de PowerShell.
+trap { Write-Host "No se publicó nada: $($_.Exception.Message)" -ForegroundColor Red; exit 1 }
 $repo = 'negriuspro/worktime360-downloads'
 $cuenta = $repo.Split('/')[0]
 
