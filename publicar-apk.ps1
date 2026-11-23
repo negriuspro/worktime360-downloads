@@ -32,7 +32,8 @@ $Notas
 Comprueba la huella antes de instalar (ver README).
 "@
 $notasArchivo = Join-Path $tmp 'notas.md'
-Set-Content -LiteralPath $notasArchivo -Value $cuerpo -Encoding utf8
+# UTF-8 sin BOM (Set-Content -Encoding utf8 de PowerShell 5.1 añade BOM y se ve en las notas).
+[IO.File]::WriteAllText($notasArchivo, $cuerpo, (New-Object Text.UTF8Encoding $false))
 
 gh release create "v$Version" $destino --repo $repo --title "WorkTime 360 $Version" --notes-file $notasArchivo --latest
 if ($LASTEXITCODE -ne 0) { throw "gh release create falló ($LASTEXITCODE)" }
