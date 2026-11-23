@@ -22,10 +22,17 @@ Si las huellas no coinciden, no instales el archivo.
 
 ## Publicar una versión nueva (solo el mantenedor)
 
+En **PowerShell**, desde esta carpeta y con el APK de la versión nueva ya compilado:
+
 ```powershell
-.\publicar-apk.ps1 -Apk "<ruta>\app-release.apk" -Version 1.2.1 -Notas "Qué cambió"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\publicar-apk.ps1 -Apk "C:\ruta\al\app-release.apk" -Version 1.2.2 -Notas "Qué cambió de verdad" -Prueba
 ```
+
+Con `-Prueba` solo revisa y muestra qué publicaría. Si todo está bien, repite el comando sin `-Prueba`.
 
 El script calcula la huella, crea el release `v<versión>` con el archivo `WorkTime360.apk`
 y lo marca como el más reciente, así que el enlace de "última versión" pasa a apuntar a él.
-Requiere [GitHub CLI](https://cli.github.com/) con sesión iniciada en la cuenta dueña del repositorio.
+Se niega a publicar si la versión ya existe, si ese mismo APK ya está publicado con otro número
+o si las notas son el texto de ejemplo. Cambia solo `gh` a la cuenta dueña del repositorio y
+al terminar deja activa la que estaba. Requiere [GitHub CLI](https://cli.github.com/) con esa
+cuenta registrada.
