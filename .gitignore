@@ -1,0 +1,11 @@
+# Repositorio público: los APK van en GitHub Releases, nunca dentro de git.
+*.apk
+*.aab
+# Nada de llaves, credenciales ni configuración local.
+*.jks
+*.keystore
+key.properties
+*.env
+.env*
+*.pem
+*.p12
